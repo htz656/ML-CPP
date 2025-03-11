@@ -11,19 +11,19 @@
 ├── LICENSE
 ├── README.md
 ├── data/
-├── notes/
 ├── include/
-│   ├── base/
-│   │   ├── math_util.h
-│   │   └── types.h
-│   ├── models/
-│   │   └── ...
-│   └── utils/
-│       ├── file_util.h
-│       └── log_util.h
+│   └── ml/
+│       ├── core/
+│       │   ├── 
+│       │   └── 
+│       ├── models/
+│       │   └── ...
+│       └── utils/
+│           ├── 
+│           └── 
 ├── src/
 │   ├── main.cpp 
-│   ├── base/
+│   ├── core/
 │   ├── models/
 │   └── utils/
 ├── test/
