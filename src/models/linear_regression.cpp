@@ -25,12 +25,12 @@ void LinearRegression::train(
 
 double LinearRegression::predict(const std::vector<double>& features) const {
     if (features.size() + 1 != weights_.size()) { 
-        throw std::invalid_argument("[ERROR] 特征维度与模型不匹配");
+        throw std::invalid_argument("[ERROR] Feature dimension does not match the model");
     }
     
-    double prediction = weights_[0];
+    double prediction = weights_[0];    // Start with the bias term
     for (size_t i = 0; i < features.size(); ++i) {
-        prediction += weights_[i + 1] * features[i]; // 跳过偏置项权重
+        prediction += weights_[i + 1] * features[i]; // Skip the bias weight
     }
     return prediction;
 }
@@ -45,7 +45,7 @@ void LinearRegression::gradient_descent(
     for (int iter = 0; iter < max_iterations_; ++iter) {
         std::vector<double> grad(n, 0.0);
         
-        // 计算梯度
+        // Compute gradient
         for (size_t i = 0; i < m; ++i) {
             double prediction = 0.0;
             for (size_t j = 0; j < n; ++j) {
@@ -57,7 +57,7 @@ void LinearRegression::gradient_descent(
             }
         }
         
-        // 更新参数
+        // Update weights
         for (size_t j = 0; j < n; ++j) {
             weights_[j] -= (learning_rate_ / m) * grad[j];
         }
@@ -66,7 +66,7 @@ void LinearRegression::gradient_descent(
 
 void LinearRegression::save(const std::string& path) const {
     std::ofstream file(path);
-    if (!file) throw std::runtime_error("[ERROR] 无法打开文件");
+    if (!file) throw std::runtime_error("[ERROR] Unable to open file");
     
     file << "LinearRegression\n";
     file << weights_.size() << "\n";
@@ -76,12 +76,12 @@ void LinearRegression::save(const std::string& path) const {
 
 void LinearRegression::load(const std::string& path) {
     std::ifstream file(path);
-    if (!file) throw std::runtime_error("[ERROR] 无法打开文件");
+    if (!file) throw std::runtime_error("[ERROR] Unable to open file");
     
     std::string identifier;
     std::getline(file, identifier);
     if (identifier != "LinearRegression") {
-        throw std::runtime_error("[ERROR] 文件格式不兼容");
+        throw std::runtime_error("[ERROR] File format is incompatible");
     }
     
     size_t size;
